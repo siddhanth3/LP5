@@ -1,0 +1,2 @@
+%%writefile graph.cpp
+!g++ graph.cpp -fopenmp  && ./a.out
