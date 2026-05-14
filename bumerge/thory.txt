@@ -1,0 +1,305 @@
+# Theory: Sequential and Parallel Bubble Sort & Merge Sort using OpenMP in C++
+
+This practical implements Sequential and Parallel versions of Bubble Sort and Merge Sort using OpenMP in C++. 
+
+---
+
+# Aim
+
+To implement Sequential and Parallel Bubble Sort and Merge Sort using OpenMP and compare their execution times.
+
+---
+
+# Introduction
+
+Sorting is the process of arranging data in ascending or descending order.
+
+Sorting algorithms are important in:
+
+* Searching
+* Data analysis
+* Database systems
+* Operating systems
+
+In this practical:
+
+* Bubble Sort
+* Merge Sort
+
+are implemented using:
+
+1. Sequential execution
+2. Parallel execution using OpenMP
+
+---
+
+# What is Parallel Computing?
+
+Parallel Computing is a technique where multiple tasks are executed simultaneously using multiple processors or threads.
+
+Advantages:
+
+* Faster execution
+* Better CPU utilization
+* Reduced computation time
+
+OpenMP is used for parallel programming in this experiment.
+
+---
+
+# What is OpenMP?
+
+OpenMP (Open Multi-Processing) is an API used for parallel programming in C/C++.
+
+It provides:
+
+* Multi-threading support
+* Parallel loops
+* Parallel sections
+
+### Important OpenMP Directives Used
+
+1. `#pragma omp parallel for`
+2. `#pragma omp parallel sections`
+3. `#pragma omp section`
+
+---
+
+# Bubble Sort
+
+## Definition
+
+Bubble Sort repeatedly compares adjacent elements and swaps them if they are in the wrong order.
+
+Largest elements gradually move toward the end of the array like bubbles rising in water.
+
+---
+
+# Working of Bubble Sort
+
+Steps:
+
+1. Compare adjacent elements
+2. Swap if left element is greater
+3. Repeat for all elements
+4. Continue until array becomes sorted
+
+---
+
+# Sequential Bubble Sort
+
+Sequential Bubble Sort uses:
+
+* Single thread
+* One comparison at a time
+
+### Time Complexity
+
+O(n^2)
+
+Disadvantages:
+
+* Slow for large datasets
+
+---
+
+# Parallel Bubble Sort
+
+Parallel Bubble Sort uses multiple threads for comparisons.
+
+It works in:
+
+1. Even Phase
+2. Odd Phase
+
+---
+
+## Even Phase
+
+Compares:
+
+* (0,1)
+* (2,3)
+* (4,5)
+
+simultaneously.
+
+---
+
+## Odd Phase
+
+Compares:
+
+* (1,2)
+* (3,4)
+* (5,6)
+
+simultaneously.
+
+---
+
+# OpenMP Parallel Loop
+
+```cpp
+#pragma omp parallel for
+```
+
+This directive distributes loop iterations among multiple threads.
+
+Advantages:
+
+* Faster sorting
+* Better CPU utilization
+
+---
+
+# Merge Sort
+
+## Definition
+
+Merge Sort is a Divide and Conquer algorithm.
+
+It:
+
+1. Divides array into halves
+2. Sorts each half recursively
+3. Merges sorted halves
+
+---
+
+# Merge Operation
+
+The merge function combines two sorted arrays into one sorted array.
+
+### Merge Process
+
+1. Compare elements from both halves
+2. Store smaller element first
+3. Copy remaining elements
+
+---
+
+# Sequential Merge Sort
+
+Sequential Merge Sort performs recursive sorting using one thread.
+
+### Time Complexity
+
+O(n\log n)
+
+Advantages:
+
+* Faster than Bubble Sort
+* Efficient for large datasets
+
+---
+
+# Parallel Merge Sort
+
+Parallel Merge Sort uses multiple threads to sort left and right halves simultaneously.
+
+### OpenMP Parallel Sections
+
+```cpp
+#pragma omp parallel sections
+```
+
+Different sections run concurrently.
+
+---
+
+# OpenMP Section Directive
+
+```cpp
+#pragma omp section
+```
+
+Each section is assigned to different threads.
+
+Advantages:
+
+* Faster recursive processing
+* Improved performance
+
+---
+
+# Recursion in Merge Sort
+
+Merge Sort uses recursion to divide the array repeatedly until:
+
+* Single element subarrays are obtained.
+
+Then arrays are merged back in sorted order.
+
+---
+
+# Execution Time Measurement
+
+Execution time is measured using:
+
+```cpp
+omp_get_wtime()
+```
+
+This function calculates:
+
+* Start time
+* End time
+* Total execution duration
+
+---
+
+# Performance Comparison
+
+The program compares:
+
+1. Sequential Bubble Sort
+2. Parallel Bubble Sort
+3. Sequential Merge Sort
+4. Parallel Merge Sort
+
+Generally:
+
+* Parallel algorithms perform faster on large datasets.
+
+---
+
+# Advantages of Parallel Sorting
+
+1. Faster execution
+2. Efficient CPU utilization
+3. Reduced processing time
+4. Better performance for large arrays
+
+---
+
+# Applications of Sorting Algorithms
+
+1. Database management
+2. Search engines
+3. Data analysis
+4. Operating systems
+5. Scientific computing
+6. Machine learning preprocessing
+
+---
+
+# Output Explanation
+
+The program:
+
+1. Accepts array elements
+2. Performs sequential sorting
+3. Performs parallel sorting
+4. Displays sorted arrays
+5. Displays execution time comparison
+
+---
+
+# Conclusion
+
+In this practical, Sequential and Parallel implementations of Bubble Sort and Merge Sort were successfully implemented using OpenMP in C++.
+
+The sorting algorithms were executed using both single-threaded and multi-threaded approaches. Execution times were measured and compared to analyze performance improvements achieved through parallel processing.
+
+This experiment demonstrates the importance of parallel computing for improving sorting efficiency and reducing computation time.

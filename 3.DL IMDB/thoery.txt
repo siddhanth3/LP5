@@ -1,0 +1,259 @@
+# Theory: Sentiment Analysis using Deep Learning on IMDB Dataset
+
+## Aim
+
+To implement a Deep Learning model using an Artificial Neural Network (ANN) for sentiment analysis on the IMDB movie review dataset and classify reviews as positive or negative.
+
+---
+
+# Introduction
+
+Sentiment Analysis is a Natural Language Processing (NLP) technique used to determine whether a piece of text expresses positive or negative emotion.
+
+In this practical, the IMDB movie review dataset is used to train a Deep Learning model that predicts whether a movie review is:
+
+* Positive Review
+* Negative Review
+
+The model is implemented using TensorFlow and Keras libraries.
+
+---
+
+# About the IMDB Dataset
+
+The IMDB dataset contains thousands of movie reviews along with sentiment labels.
+
+### Dataset Information
+
+* Reviews are stored as numerical word indexes.
+* Labels:
+
+  * 1 → Positive Review
+  * 0 → Negative Review
+
+### Vocabulary Size
+
+Only the top 5000 frequently used words are considered.
+
+---
+
+# Deep Learning Concept
+
+Deep Learning uses neural networks with multiple layers to learn patterns from data automatically.
+
+In this experiment:
+
+* Text reviews are converted into numerical sequences.
+* The ANN model learns sentiment patterns from the reviews.
+
+---
+
+# Steps Involved in the Experiment
+
+## 1. Importing Libraries
+
+Necessary libraries are imported:
+
+* NumPy
+* Matplotlib
+* TensorFlow
+* Keras
+
+These libraries help in:
+
+* Data handling
+* Model building
+* Visualization
+
+---
+
+# Loading Dataset
+
+The IMDB dataset is loaded using Keras.
+
+The dataset is divided into:
+
+* Training Data
+* Testing Data
+
+Training data is used to train the model.
+Testing data is used to evaluate model performance.
+
+---
+
+# Sequence Padding
+
+Movie reviews have different lengths.
+
+To make all reviews equal in length, padding is used.
+
+### Maximum Length
+
+Each review is converted to a fixed length of 200 words.
+
+This process improves model consistency and training efficiency.
+
+---
+
+# Neural Network Architecture
+
+## 1. Embedding Layer
+
+The Embedding layer converts word indexes into dense vector representations.
+
+It helps the model understand semantic relationships between words.
+
+---
+
+## 2. Flatten Layer
+
+The Flatten layer converts multidimensional data into one-dimensional form before passing it to dense layers.
+
+---
+
+## 3. Dense Layers
+
+Dense layers perform learning and pattern recognition.
+
+The model contains multiple Dense layers with ReLU activation.
+
+### ReLU Activation Function
+
+f(x)=\max(0,x)
+
+ReLU improves learning speed and handles non-linear relationships.
+
+---
+
+## 4. Dropout Layer
+
+Dropout is used to prevent overfitting.
+
+It randomly disables some neurons during training so the model generalizes better.
+
+---
+
+## 5. Output Layer
+
+The output layer contains one neuron with Sigmoid activation because this is a binary classification problem.
+
+### Sigmoid Function
+
+\sigma(x)=\frac{1}{1+e^{-x}}
+
+Output values:
+
+* Near 1 → Positive Review
+* Near 0 → Negative Review
+
+---
+
+# Model Compilation
+
+The model is compiled using:
+
+* Optimizer: Adam
+* Loss Function: Binary Crossentropy
+* Metric: Accuracy
+
+## Binary Crossentropy Formula
+
+L=-\frac{1}{N}\sum_{i=1}^{N}[y_i\log(\hat{y_i})+(1-y_i)\log(1-\hat{y_i})]
+
+This loss function is commonly used for binary classification problems.
+
+---
+
+# Early Stopping
+
+EarlyStopping callback is used to stop training when validation loss stops improving.
+
+Advantages:
+
+* Prevents overfitting
+* Saves training time
+* Improves model performance
+
+---
+
+# Model Training
+
+The model is trained using:
+
+* Epochs = 2
+* Batch Size = 128
+
+### Epoch
+
+An epoch means one complete pass of the training dataset through the neural network.
+
+During training:
+
+* The network updates weights
+* Learns sentiment patterns
+* Reduces prediction error
+
+---
+
+# Model Evaluation
+
+After training, the model is tested on unseen data.
+
+Evaluation metrics:
+
+* Test Loss
+* Test Accuracy
+* Validation Accuracy
+
+Higher accuracy indicates better sentiment prediction.
+
+---
+
+# Decoding Reviews
+
+Encoded numerical reviews are converted back into readable text using a vocabulary dictionary.
+
+This helps in understanding how the model interprets reviews.
+
+---
+
+# Accuracy and Loss Graphs
+
+Graphs are plotted for:
+
+1. Training Accuracy vs Validation Accuracy
+2. Training Loss vs Validation Loss
+
+These graphs help analyze:
+
+* Learning performance
+* Overfitting or underfitting
+
+---
+
+# Applications of Sentiment Analysis
+
+1. Movie review analysis
+2. Product review classification
+3. Social media opinion mining
+4. Customer feedback analysis
+5. Brand reputation monitoring
+
+---
+
+# Advantages of Deep Learning in NLP
+
+1. Learns automatically from text data
+2. Handles large datasets efficiently
+3. Gives high prediction accuracy
+4. Captures complex language patterns
+
+---
+
+# Conclusion
+
+In this practical, a Deep Learning model was successfully implemented for sentiment analysis using the IMDB movie review dataset.
+
+The reviews were preprocessed using padding and embedding techniques. The ANN model learned patterns from text data and classified reviews as positive or negative with good accuracy.
+
+This experiment demonstrates the use of Deep Learning and NLP techniques for real-world text classification problems.

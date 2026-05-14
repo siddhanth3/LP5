@@ -1,0 +1,293 @@
+# Theory: Google Stock Price Prediction using Deep Learning (LSTM)
+
+## Aim
+
+To implement a Deep Learning model using Long Short-Term Memory (LSTM) networks for predicting Google stock prices based on historical stock market data.
+
+---
+
+# Introduction
+
+Stock Price Prediction is the process of forecasting future stock prices using historical market data.
+
+Deep Learning techniques, especially Recurrent Neural Networks (RNN) and Long Short-Term Memory (LSTM), are widely used for time-series forecasting because they can learn patterns from sequential data.
+
+In this practical, an LSTM model is used to predict Google stock prices.
+
+---
+
+# What is Deep Learning?
+
+Deep Learning is a subset of Machine Learning that uses neural networks with multiple layers to learn patterns automatically from large datasets.
+
+Deep Learning is highly useful in:
+
+* Stock market prediction
+* Image recognition
+* Speech recognition
+* NLP applications
+
+---
+
+# What is Time Series Data?
+
+Time series data is a sequence of data collected over time intervals.
+
+Examples:
+
+* Stock prices
+* Weather data
+* Sales records
+
+In this experiment:
+
+* Historical Google stock prices are used as time-series data.
+
+---
+
+# What is LSTM?
+
+LSTM (Long Short-Term Memory) is a special type of Recurrent Neural Network (RNN) designed for sequential and time-series data.
+
+LSTM can remember important information for long periods and solve the vanishing gradient problem present in traditional RNNs.
+
+Advantages of LSTM:
+
+1. Handles sequential data efficiently
+2. Remembers long-term dependencies
+3. Gives better prediction accuracy
+
+---
+
+# Dataset Information
+
+The dataset contains historical Google stock market data such as:
+
+* Open Price
+* High Price
+* Low Price
+* Close Price
+* Volume
+
+The model uses previous stock prices to predict future prices.
+
+---
+
+# Steps Involved in the Experiment
+
+## 1. Importing Libraries
+
+Important libraries used:
+
+* NumPy
+* Pandas
+* Matplotlib
+* TensorFlow
+* Keras
+* Scikit-learn
+
+These libraries help in:
+
+* Data handling
+* Visualization
+* Deep Learning model creation
+
+---
+
+# 2. Data Preprocessing
+
+## Handling Dataset
+
+The stock price dataset is loaded using Pandas.
+
+The important column used:
+
+* Open Stock Price
+
+---
+
+## Feature Scaling
+
+Stock prices are normalized using MinMaxScaler.
+
+### Min-Max Normalization Formula
+
+x_{norm}=\frac{x-x_{min}}{x_{max}-x_{min}}
+
+Advantages:
+
+* Faster training
+* Better convergence
+* Improved model performance
+
+---
+
+# 3. Creating Time Sequences
+
+LSTM requires sequential input data.
+
+Previous 60 days’ stock prices are used to predict the next day’s price.
+
+Example:
+
+* Input → Previous 60 stock prices
+* Output → Next stock price
+
+---
+
+# 4. Reshaping Data
+
+Input data is reshaped into 3D format because LSTM expects:
+
+* Samples
+* Time Steps
+* Features
+
+---
+
+# LSTM Neural Network Architecture
+
+## 1. LSTM Layer
+
+The LSTM layer learns patterns and dependencies from stock price sequences.
+
+### LSTM Memory Concept
+
+LSTM uses:
+
+* Input Gate
+* Forget Gate
+* Output Gate
+
+to manage information flow.
+
+---
+
+## Forget Gate Formula
+
+f_t=\sigma(W_f[h_{t-1},x_t]+b_f)
+
+The forget gate decides which information should be removed.
+
+---
+
+## Input Gate Formula
+
+i_t=\sigma(W_i[h_{t-1},x_t]+b_i)
+
+The input gate decides which new information should be stored.
+
+---
+
+## Output Gate Formula
+
+o_t=\sigma(W_o[h_{t-1},x_t]+b_o)
+
+The output gate determines the final output.
+
+---
+
+# Dropout Layer
+
+Dropout is used to reduce overfitting.
+
+It randomly disables neurons during training.
+
+Advantages:
+
+* Better generalization
+* Prevents memorization
+
+---
+
+# Dense Layer
+
+The dense layer produces the final predicted stock price.
+
+---
+
+# Model Compilation
+
+The model is compiled using:
+
+* Optimizer: Adam
+* Loss Function: Mean Squared Error (MSE)
+
+---
+
+# Mean Squared Error (MSE)
+
+MSE measures the average squared difference between actual and predicted values.
+
+### Formula
+
+MSE=\frac{1}{n}\sum_{i=1}^{n}(y_i-\hat{y_i})^2
+
+Lower MSE indicates better prediction accuracy.
+
+---
+
+# Model Training
+
+The model is trained using:
+
+* Epochs
+* Batch Size
+
+### Epoch
+
+One complete pass of the training dataset through the neural network.
+
+During training:
+
+* LSTM learns stock market trends
+* Updates weights
+* Reduces prediction error
+
+---
+
+# Prediction
+
+The trained LSTM model predicts future Google stock prices using historical data.
+
+Predicted prices are compared with actual stock prices.
+
+---
+
+# Visualization
+
+Graphs are plotted for:
+
+* Actual Stock Prices
+* Predicted Stock Prices
+
+This helps analyze model performance visually.
+
+---
+
+# Applications of Stock Price Prediction
+
+1. Financial forecasting
+2. Investment analysis
+3. Market trend prediction
+4. Risk management
+5. Trading systems
+
+---
+
+# Advantages of LSTM
+
+1. Handles sequential data effectively
+2. Remembers long-term dependencies
+3. High prediction accuracy
+4. Suitable for time-series forecasting
+
+---
+
+# Conclusion
+
+In this practical, a Google Stock Price Prediction system was implemented using LSTM-based Deep Learning techniques.
+
+The historical stock price data was preprocessed, normalized, and converted into sequential format. The LSTM model learned stock market trends and predicted future stock prices with good accuracy.
+
+This experiment demonstrates the use of Deep Learning and LSTM networks in real-world financial forecasting applications.

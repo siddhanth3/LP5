@@ -1,0 +1,120 @@
+This practical demonstrates the implementation of a Multi-Layer Perceptron (MLP) classifier for alphabet or letter recognition using Machine Learning and Artificial Neural Networks. The main objective of this experiment is to classify English alphabet letters based on numerical features extracted from images. This type of problem belongs to supervised learning and specifically falls under multi-class classification because the model predicts one class out of multiple possible classes from A to Z.
+
+The practical begins by importing the required libraries. The statement:
+
+import pandas as pd
+
+imports the Pandas library, which is widely used for data manipulation and analysis. Pandas provides the DataFrame structure that stores data in tabular form using rows and columns.
+
+The following lines import modules from Scikit-learn:
+
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.neural_network import MLPClassifier
+from sklearn.metrics import accuracy_score
+
+The train_test_split function is used to divide the dataset into training and testing sets. StandardScaler is used for feature scaling and normalization. MLPClassifier is a machine learning algorithm based on Artificial Neural Networks used for classification tasks. accuracy_score calculates the prediction accuracy of the model.
+
+The next step involves mounting Google Drive in Google Colab:
+
+from google.colab import drive
+drive.mount('/content/drive')
+
+This allows access to files stored in Google Drive. In this experiment, the dataset file named 2_letter_recognition.data is stored in the drive and loaded into the notebook environment.
+
+The dataset is loaded using:
+
+dataset = pd.read_csv("2_letter_recognition.data", sep=",")
+
+The read_csv() function reads the dataset file and converts it into a Pandas DataFrame. The parameter sep="," indicates that the values in the dataset are separated by commas. The dataset contains features related to letter images and the corresponding alphabet labels.
+
+The dataset is then divided into input features and output labels. The statement:
+
+X = dataset.iloc[:, 1:17]
+
+selects columns from index 1 to 16 as input features. These columns contain numerical attributes extracted from the letter images, such as pixel statistics and shape-related measurements.
+
+The target variable is selected using:
+
+Y = dataset.select_dtypes(include=[object])
+
+This statement selects all columns containing object-type data, which in this case represents the alphabet labels from A to Z. These labels act as the dependent variable that the neural network must predict.
+
+The dataset is then split into training and validation sets using:
+
+X_train, X_validation, Y_train, Y_validation = train_test_split(X, Y, test_size=0.20, random_state=10)
+
+The train_test_split() function divides the data into 80% training data and 20% validation data. Training data is used to train the model, while validation data is used to evaluate its performance on unseen examples. The parameter random_state=10 ensures that the same data split is obtained every time the code is executed, improving reproducibility.
+
+Feature scaling is performed next using the StandardScaler class:
+
+scaler = StandardScaler()
+scaler.fit(X_train)
+
+Feature scaling is very important in neural networks because input features may have different ranges. Neural networks train more efficiently when features are normalized. The fit() function calculates the mean and standard deviation of each feature from the training data.
+
+The training and validation data are then transformed using:
+
+X_train = scaler.transform(X_train)
+X_validation = scaler.transform(X_validation)
+
+The transform() function standardizes the data by converting each feature into a scaled form with mean 0 and standard deviation 1. This helps improve convergence during training and prevents features with large values from dominating the learning process.
+
+The Artificial Neural Network model is then created using the MLPClassifier:
+
+mlp = MLPClassifier(hidden_layer_sizes=(250, 300), max_iter=1000000, activation='logistic')
+
+The MLPClassifier implements a Multi-Layer Perceptron neural network. The parameter hidden_layer_sizes=(250, 300) specifies two hidden layers. The first hidden layer contains 250 neurons, while the second hidden layer contains 300 neurons. Hidden layers help the network learn complex patterns and relationships within the dataset.
+
+The parameter max_iter=1000000 defines the maximum number of iterations during training. A very large value is used to ensure that the model gets enough opportunities to converge and minimize the error. The parameter activation='logistic' specifies the logistic sigmoid activation function. The sigmoid function converts outputs into values between 0 and 1 and introduces non-linearity into the network.
+
+The next step imports the confusion matrix visualization tool from Yellowbrick:
+
+from yellowbrick.classifier import confusion_matrix
+
+Yellowbrick is a visualization library that helps analyze machine learning models graphically. A confusion matrix is used to evaluate classification performance by comparing actual and predicted labels.
+
+The confusion matrix object is created using:
+
+cm = confusion_matrix(
+    mlp,
+    X_train,
+    Y_train,
+    X_validation,
+    Y_validation,
+    classes="A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z".split(',')
+)
+
+This statement initializes the confusion matrix visualizer for all alphabet classes from A to Z. The split(',') function converts the string of class labels into a list.
+
+The model is trained using:
+
+cm.fit(X_train, Y_train.values.ravel())
+
+The fit() function trains the neural network using the scaled training data. The method values.ravel() converts the target labels into a one-dimensional array because Scikit-learn expects target labels in flattened form.
+
+The trained model is then evaluated using:
+
+cm.score(X_validation, Y_validation)
+
+This computes the prediction performance on the validation dataset. The confusion matrix visually displays how many letters are correctly and incorrectly classified.
+
+Predictions are generated using:
+
+predictions = cm.predict(X_validation)
+
+The predict() function uses the trained model to predict alphabet classes for the validation data. The predicted labels are stored in the variable predictions.
+
+The next line:
+
+predictions
+
+displays the predicted output labels generated by the neural network.
+
+Finally, the accuracy of the model is calculated using:
+
+print("Accuracy: ", accuracy_score(Y_validation, predictions))
+
+The accuracy_score() function compares actual labels with predicted labels and calculates the percentage of correctly classified instances. Accuracy is one of the most commonly used evaluation metrics for classification problems. A high accuracy value indicates that the neural network successfully learned the patterns in the dataset and can classify letters effectively.
+
+Overall, this practical provides a detailed understanding of implementing Artificial Neural Networks for multi-class classification problems. It explains important concepts such as dataset loading, feature selection, data splitting, feature scaling, neural network architecture, hidden layers, activation functions, model training, prediction, confusion matrix analysis, and accuracy evaluation. The experiment demonstrates how Multi-Layer Perceptron classifiers can recognize and classify handwritten or image-based alphabet characters efficiently.

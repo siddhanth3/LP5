@@ -1,0 +1,287 @@
+# Theory: Parallel BFS and DFS Traversal using OpenMP in C++
+
+This practical implements Parallel Breadth-First Search (BFS) and Parallel Depth-First Search (DFS) traversal on a tree using OpenMP for parallel processing in C++. 
+
+---
+
+# Aim
+
+To implement parallel BFS and DFS traversal of a tree using OpenMP in C++ and compare their execution times.
+
+---
+
+# Introduction
+
+Tree traversal is a process of visiting all nodes of a tree data structure.
+
+Two common traversal techniques are:
+
+1. Breadth-First Search (BFS)
+2. Depth-First Search (DFS)
+
+In this practical, parallel processing is used to improve traversal performance using OpenMP multi-threading.
+
+---
+
+# What is Parallel Computing?
+
+Parallel Computing is a technique where multiple tasks are executed simultaneously using multiple processors or threads.
+
+Advantages:
+
+* Faster execution
+* Better CPU utilization
+* Reduced processing time
+
+OpenMP is used in this experiment for parallel execution.
+
+---
+
+# What is OpenMP?
+
+OpenMP (Open Multi-Processing) is an API used for parallel programming in C/C++.
+
+It supports:
+
+* Multi-threading
+* Parallel loops
+* Shared memory programming
+
+### Important OpenMP Directives Used
+
+1. `#pragma omp parallel for`
+2. `#pragma omp critical`
+
+---
+
+# Tree Data Structure
+
+A tree is a hierarchical data structure consisting of:
+
+* Nodes
+* Edges
+
+In this practical:
+
+* Adjacency List representation is used.
+
+Each node stores a list of connected nodes.
+
+---
+
+# Breadth-First Search (BFS)
+
+## Definition
+
+BFS visits nodes level by level.
+
+It first visits:
+
+* Root node
+* All neighboring nodes
+* Then next-level nodes
+
+BFS uses a Queue data structure.
+
+---
+
+# Working of BFS
+
+Steps:
+
+1. Start from root node
+2. Mark node as visited
+3. Add node to queue
+4. Remove node from queue
+5. Visit all unvisited neighbors
+6. Repeat until queue becomes empty
+
+---
+
+# Parallel BFS
+
+In parallel BFS:
+
+* Neighbor nodes are processed simultaneously using multiple threads.
+
+### OpenMP Parallel Loop
+
+```cpp
+#pragma omp parallel for
+```
+
+Advantages:
+
+* Faster traversal
+* Reduced execution time
+
+---
+
+# Depth-First Search (DFS)
+
+## Definition
+
+DFS explores nodes deeply before backtracking.
+
+It visits:
+
+* One branch completely
+* Then returns to explore another branch
+
+DFS uses recursion or stack data structure.
+
+---
+
+# Working of DFS
+
+Steps:
+
+1. Visit root node
+2. Mark node as visited
+3. Visit one neighbor recursively
+4. Continue until leaf node
+5. Backtrack and explore remaining nodes
+
+---
+
+# Parallel DFS
+
+In parallel DFS:
+
+* Multiple neighboring branches are explored simultaneously.
+
+Recursive calls are parallelized using OpenMP.
+
+Advantages:
+
+* Efficient branch exploration
+* Faster execution for large trees
+
+---
+
+# Critical Section
+
+When multiple threads access shared resources simultaneously, conflicts may occur.
+
+To avoid this, critical sections are used.
+
+### OpenMP Critical Directive
+
+```cpp
+#pragma omp critical
+```
+
+This ensures:
+
+* Only one thread accesses shared data at a time.
+
+Used for:
+
+* Queue operations
+* Updating visited nodes
+
+---
+
+# Adjacency List Representation
+
+The tree is stored using:
+
+```cpp
+vector<vector<int>> adj;
+```
+
+Advantages:
+
+* Memory efficient
+* Faster traversal operations
+
+---
+
+# Queue in BFS
+
+Queue follows:
+
+* FIFO (First In First Out)
+
+Operations:
+
+* push()
+* pop()
+
+Used to process nodes level by level.
+
+---
+
+# Recursion in DFS
+
+DFS uses recursive function calls to explore deeper nodes.
+
+Recursive traversal continues until:
+
+* All nodes are visited.
+
+---
+
+# Execution Time Measurement
+
+The program measures traversal execution time using:
+
+```cpp
+chrono::high_resolution_clock
+```
+
+Execution time is calculated in milliseconds.
+
+---
+
+# Performance Comparison
+
+The program compares:
+
+* BFS execution time
+* DFS execution time
+
+The faster traversal method is displayed.
+
+---
+
+# Advantages of Parallel BFS and DFS
+
+1. Faster execution
+2. Efficient CPU utilization
+3. Better performance on large trees
+4. Reduced processing time
+
+---
+
+# Applications
+
+1. Artificial Intelligence
+2. Web Crawlers
+3. Network Routing
+4. Path Finding Algorithms
+5. Social Network Analysis
+6. Graph Processing
+
+---
+
+# Output Explanation
+
+The program:
+
+1. Accepts number of nodes
+2. Accepts tree edges
+3. Displays tree structure
+4. Performs Parallel BFS traversal
+5. Performs Parallel DFS traversal
+6. Displays execution time comparison
+
+---
+
+# Conclusion
+
+In this practical, Parallel BFS and DFS traversal were successfully implemented using OpenMP in C++.
+
+The tree was represented using an adjacency list, and traversal operations were parallelized using multi-threading. Execution times for BFS and DFS were measured and compared.
+
+This experiment demonstrates the importance of parallel computing for improving the performance of graph and tree traversal algorithms.

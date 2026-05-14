@@ -1,0 +1,272 @@
+# Experiment: HPC Application for AI/ML Domain using MPI K-Means Clustering
+
+## Aim
+
+To implement a High Performance Computing (HPC) application for AI/ML domain using MPI-based parallel K-Means clustering algorithm in C++.
+
+---
+
+# Theory
+
+This experiment implements the K-Means clustering algorithm using MPI (Message Passing Interface) for parallel processing.
+
+K-Means is a Machine Learning algorithm used for clustering similar data points into groups called clusters.
+
+The program uses parallel computing concepts to improve execution speed by dividing the work among multiple processes.
+
+This experiment combines:
+
+* Artificial Intelligence / Machine Learning
+* High Performance Computing (HPC)
+* Parallel Processing
+* MPI Programming
+
+---
+
+# What is K-Means Clustering?
+
+K-Means is an Unsupervised Machine Learning algorithm.
+
+It groups similar data points into K clusters based on distance from cluster centroids.
+
+The algorithm works iteratively until the centroids stabilize.
+
+---
+
+# Why HPC is Used?
+
+In large datasets:
+
+* processing becomes slow on a single processor
+* HPC improves speed using parallel execution
+
+MPI divides the dataset among multiple processes so that computation happens simultaneously.
+
+This reduces execution time.
+
+---
+
+# Working of Experiment
+
+## Step 1: Initialize MPI Environment
+
+MPI starts parallel execution using:
+
+```cpp
+MPI_Init()
+```
+
+Each process gets:
+
+* rank (process ID)
+* total number of processes
+
+---
+
+# Step 2: Generate Dataset
+
+The root process (rank 0) creates random data points.
+
+Each point contains:
+
+* x coordinate
+* y coordinate
+
+Example:
+
+```text
+(12,45)
+(67,89)
+(25,31)
+```
+
+---
+
+# Step 3: Initialize Centroids
+
+Initial cluster centers (centroids) are selected from dataset points.
+
+Example:
+
+```text
+Centroid 1 = First point
+Centroid 2 = Second point
+```
+
+---
+
+# Step 4: Broadcast Centroids
+
+Centroid information is shared with all processes using:
+
+```cpp
+MPI_Bcast()
+```
+
+---
+
+# Step 5: Scatter Dataset
+
+Dataset is divided among processes using:
+
+```cpp
+MPI_Scatter()
+```
+
+Each process receives a subset of points.
+
+---
+
+# Step 6: Distance Calculation
+
+Each process calculates distance between:
+
+* local data points
+* centroids
+
+Distance Formula:
+
+genui{"math_block_widget_always_prefetch_v2":{"content":"d = \sqrt{(x_2-x_1)^2 + (y_2-y_1)^2}"}}
+
+Nearest centroid determines the cluster assignment.
+
+---
+
+# Step 7: Update Centroids
+
+Each process calculates:
+
+* local sum of coordinates
+* local count of points
+
+Then all processes combine results using:
+
+```cpp
+MPI_Allreduce()
+```
+
+New centroid values are calculated.
+
+---
+
+# Step 8: Repeat Iterations
+
+The process repeats multiple times until clusters become stable.
+
+---
+
+# Step 9: Final Output
+
+Program prints:
+
+* final centroids
+* execution time
+
+Example:
+
+```text
+Final Centroids:
+Cluster 0: (25,40)
+Cluster 1: (70,82)
+```
+
+---
+
+# MPI Functions Used
+
+## MPI_Init()
+
+Starts MPI execution environment.
+
+## MPI_Comm_rank()
+
+Returns process ID.
+
+## MPI_Comm_size()
+
+Returns total number of processes.
+
+## MPI_Bcast()
+
+Broadcasts data to all processes.
+
+## MPI_Scatter()
+
+Distributes dataset among processes.
+
+## MPI_Allreduce()
+
+Combines results from all processes.
+
+## MPI_Finalize()
+
+Ends MPI execution.
+
+---
+
+# Advantages
+
+* Faster execution
+* Efficient for large datasets
+* Parallel processing improves performance
+* Useful for AI/ML applications
+
+---
+
+# Applications
+
+* Customer Segmentation
+* Data Mining
+* Pattern Recognition
+* Image Clustering
+* Recommendation Systems
+
+---
+
+# Result
+
+Successfully implemented parallel K-Means clustering using MPI for HPC-based AI/ML application in C++.
+
+The program grouped data points into clusters and improved computation speed using parallel processing.
+
+---
+
+# Important Viva Questions
+
+## What is HPC?
+
+HPC stands for High Performance Computing. It uses parallel processing for faster computation.
+
+## What is MPI?
+
+MPI is Message Passing Interface used for communication between multiple processes.
+
+## What is K-Means?
+
+K-Means is an unsupervised machine learning clustering algorithm.
+
+## Why is K-Means used?
+
+To group similar data points into clusters.
+
+## What is a centroid?
+
+Centroid is the center point of a cluster.
+
+## Why use MPI in K-Means?
+
+To divide workload among processes and improve speed.
+
+## What is unsupervised learning?
+
+Learning without labeled output data.
+
+## Which distance formula is used?
+
+Euclidean Distance Formula.
+
+---
+
+# One-Line Conclusion
+
+“This experiment implements an HPC-based AI/ML application using MPI parallel K-Means clustering algorithm for efficient and faster data clustering.”

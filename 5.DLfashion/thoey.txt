@@ -1,0 +1,303 @@
+# Theory: Image Classification using Convolutional Neural Network (CNN)
+
+## Aim
+
+To implement an Image Classification system using Convolutional Neural Network (CNN) for classifying images into different categories.
+
+---
+
+# Introduction
+
+Image Classification is a computer vision technique used to identify and categorize images into predefined classes.
+
+Deep Learning models, especially Convolutional Neural Networks (CNNs), are highly effective for image classification tasks because they automatically learn image features such as:
+
+* Edges
+* Shapes
+* Colors
+* Textures
+
+In this practical, a CNN model is trained to classify images accurately.
+
+---
+
+# What is Deep Learning?
+
+Deep Learning is a subset of Machine Learning that uses neural networks with multiple layers to learn patterns automatically from large datasets.
+
+Applications include:
+
+* Face recognition
+* Medical imaging
+* Object detection
+* Autonomous vehicles
+
+---
+
+# What is CNN?
+
+Convolutional Neural Network (CNN) is a specialized neural network designed for image processing tasks.
+
+CNN automatically extracts features from images without manual feature engineering.
+
+---
+
+# Dataset
+
+The dataset contains images belonging to multiple categories/classes.
+
+The dataset is divided into:
+
+* Training Data
+* Testing Data
+
+Training data is used to train the model.
+Testing data is used to evaluate model performance.
+
+---
+
+# Steps Involved in the Experiment
+
+## 1. Importing Libraries
+
+Important libraries used:
+
+* TensorFlow
+* Keras
+* NumPy
+* Matplotlib
+* OpenCV
+
+These libraries help in:
+
+* Image processing
+* Neural network implementation
+* Visualization
+
+---
+
+# 2. Image Preprocessing
+
+## Image Resizing
+
+All images are resized into fixed dimensions such as:
+
+* 128 × 128 pixels
+
+This ensures uniform input size for the CNN model.
+
+---
+
+## Image Normalization
+
+Pixel values are scaled between 0 and 1.
+
+### Formula
+
+x_{norm}=\frac{x}{255}
+
+Advantages:
+
+* Faster training
+* Better convergence
+* Improved model performance
+
+---
+
+# 3. Data Augmentation
+
+Data augmentation creates modified copies of images using:
+
+* Rotation
+* Flipping
+* Zooming
+* Shifting
+
+Advantages:
+
+* Reduces overfitting
+* Improves generalization
+
+---
+
+# CNN Architecture
+
+## 1. Convolution Layer
+
+The convolution layer extracts important image features.
+
+### Convolution Formula
+
+(I*K)(x,y)=\sum_m\sum_n I(m,n)K(x-m,y-n)
+
+Where:
+
+* I = Input image
+* K = Kernel/Filter
+
+The convolution operation detects:
+
+* Edges
+* Corners
+* Shapes
+* Patterns
+
+---
+
+## 2. ReLU Activation Function
+
+ReLU introduces non-linearity into the model.
+
+### Formula
+
+f(x)=\max(0,x)
+
+Advantages:
+
+* Faster computation
+* Prevents vanishing gradient problem
+
+---
+
+## 3. Pooling Layer
+
+Pooling reduces feature map dimensions.
+
+### Max Pooling
+
+Selects the maximum value from a region.
+
+Advantages:
+
+* Reduces computational complexity
+* Prevents overfitting
+* Preserves important features
+
+---
+
+## 4. Flatten Layer
+
+Converts 2D feature maps into 1D vectors before passing them to dense layers.
+
+---
+
+## 5. Dense Layer
+
+Dense layers perform classification using extracted features.
+
+---
+
+## 6. Output Layer
+
+The output layer predicts image classes.
+
+Softmax activation is commonly used for multi-class classification.
+
+### Softmax Formula
+
+Softmax(x_i)=\frac{e^{x_i}}{\sum_je^{x_j}}
+
+The class with the highest probability is selected as the predicted output.
+
+---
+
+# Loss Function
+
+Categorical Crossentropy is used for multi-class classification.
+
+### Formula
+
+L=-\sum_{i=1}^{C}y_i\log(\hat{y_i})
+
+Where:
+
+* yᵢ = Actual class
+* ŷᵢ = Predicted probability
+
+Lower loss indicates better model performance.
+
+---
+
+# Optimizer
+
+Adam optimizer is used for updating model weights efficiently.
+
+Advantages:
+
+* Faster convergence
+* Adaptive learning rate
+* Good performance on deep networks
+
+---
+
+# Model Training
+
+The CNN model is trained using:
+
+* Epochs
+* Batch Size
+
+### Epoch
+
+One complete pass of the training dataset through the neural network.
+
+During training:
+
+* CNN learns image patterns
+* Updates weights
+* Improves accuracy
+
+---
+
+# Model Evaluation
+
+After training, the model is tested on unseen images.
+
+Evaluation metrics:
+
+* Accuracy
+* Loss
+* Validation Accuracy
+
+Higher accuracy indicates better classification performance.
+
+---
+
+# Prediction
+
+The trained CNN model predicts the category of input images.
+
+Example:
+
+* Cat Image → Predicted Class: Cat
+* Dog Image → Predicted Class: Dog
+
+---
+
+# Applications of Image Classification
+
+1. Face recognition
+2. Medical diagnosis
+3. Self-driving cars
+4. Security systems
+5. Traffic sign recognition
+6. Object detection
+
+---
+
+# Advantages of CNN
+
+1. Automatic feature extraction
+2. High accuracy
+3. Efficient image processing
+4. Handles large datasets effectively
+
+---
+
+# Conclusion
+
+In this practical, an Image Classification system was successfully implemented using Convolutional Neural Network (CNN).
+
+The images were preprocessed and trained using convolution, pooling, flatten, and dense layers. The CNN model learned image features automatically and classified images with good accuracy.
+
+This experiment demonstrates the importance of Deep Learning and CNNs in modern computer vision applications.

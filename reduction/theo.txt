@@ -1,0 +1,268 @@
+# Theory: Parallel Reduction Operations using OpenMP in C++
+
+This practical implements parallel reduction operations such as finding Minimum, Maximum, Sum, and Average of array elements using OpenMP in C++. 
+
+---
+
+# Aim
+
+To implement parallel reduction operations using OpenMP in C++ for calculating:
+
+* Minimum value
+* Maximum value
+* Sum
+* Average
+
+of array elements.
+
+---
+
+# Introduction
+
+Reduction operations combine multiple values into a single result.
+
+Examples:
+
+* Sum of elements
+* Maximum value
+* Minimum value
+* Average
+
+In this practical, OpenMP reduction techniques are used to perform these operations efficiently using parallel processing.
+
+---
+
+# What is Parallel Computing?
+
+Parallel Computing is a method where multiple tasks are executed simultaneously using multiple processors or threads.
+
+Advantages:
+
+* Faster computation
+* Efficient CPU utilization
+* Reduced execution time
+
+---
+
+# What is OpenMP?
+
+OpenMP (Open Multi-Processing) is an API used for parallel programming in C/C++.
+
+It supports:
+
+* Multi-threading
+* Parallel loops
+* Reduction operations
+
+---
+
+# Reduction in OpenMP
+
+Reduction combines results from multiple threads into a single final result.
+
+Each thread:
+
+1. Performs operations independently
+2. Stores partial result
+3. Combines all partial results at the end
+
+---
+
+# OpenMP Reduction Syntax
+
+```cpp id="h3f27x"
+#pragma omp parallel for reduction(operator:variable)
+```
+
+Where:
+
+* operator → operation type (+, min, max)
+* variable → shared variable being reduced
+
+---
+
+# Array Processing
+
+The program accepts:
+
+* Number of elements
+* Array values
+
+The array is processed in parallel using multiple threads.
+
+---
+
+# Minimum Reduction
+
+## Definition
+
+Minimum reduction finds the smallest value in the array.
+
+### Initialization
+
+The minimum value is initialized using:
+
+```cpp id="grq2n8"
+INT_MAX
+```
+
+because any array element will be smaller than this value.
+
+---
+
+# Parallel Minimum Reduction
+
+```cpp id="8ftd2o"
+#pragma omp parallel for reduction(min:min_value)
+```
+
+Each thread:
+
+* Finds local minimum
+* Combines results to obtain global minimum
+
+---
+
+# Maximum Reduction
+
+## Definition
+
+Maximum reduction finds the largest value in the array.
+
+### Initialization
+
+The maximum value is initialized using:
+
+```cpp id="lhpxfh"
+INT_MIN
+```
+
+because any array element will be larger than this value.
+
+---
+
+# Parallel Maximum Reduction
+
+```cpp id="63x5eu"
+#pragma omp parallel for reduction(max:max_value)
+```
+
+Each thread:
+
+* Finds local maximum
+* Combines results to obtain global maximum
+
+---
+
+# Sum Reduction
+
+## Definition
+
+Sum reduction calculates the total sum of all array elements.
+
+### Formula
+
+Sum=\sum_{i=1}^{n}a_i
+
+---
+
+# Parallel Sum Reduction
+
+```cpp id="d3l5h9"
+#pragma omp parallel for reduction(+:sum)
+```
+
+Each thread:
+
+* Computes partial sum
+* Combines all sums together
+
+Advantages:
+
+* Faster addition for large arrays
+
+---
+
+# Average Reduction
+
+## Definition
+
+Average is calculated by dividing total sum by number of elements.
+
+### Formula
+
+Average=\frac{\sum_{i=1}^{n}a_i}{n}
+
+---
+
+# Parallel Average Calculation
+
+Steps:
+
+1. Calculate sum using reduction
+2. Divide sum by total number of elements
+
+The average is stored as:
+
+```cpp id="10rjwb"
+double avg
+```
+
+to maintain decimal precision.
+
+---
+
+# OpenMP Parallel For
+
+```cpp id="h0cm5k"
+#pragma omp parallel for
+```
+
+This directive distributes loop iterations among multiple threads.
+
+Advantages:
+
+* Faster execution
+* Better performance
+
+---
+
+# Advantages of Reduction Operations
+
+1. Efficient parallel computation
+2. Faster processing for large datasets
+3. Better CPU utilization
+4. Reduced execution time
+
+---
+
+# Applications
+
+1. Data analysis
+2. Scientific computing
+3. Statistical calculations
+4. Machine learning preprocessing
+5. Financial analysis
+6. Big data processing
+
+---
+
+# Output Explanation
+
+The program:
+
+1. Accepts array elements
+2. Finds minimum value
+3. Finds maximum value
+4. Calculates sum
+5. Calculates average
+
+All operations are performed using parallel reduction techniques.
+
+---
+
+# Conclusion
+
+In this practical, parallel reduction operations were successfully implemented using OpenMP in C++.
+
+The program performed Minimum, Maximum, Sum, and Average calculations efficiently using multi-threading and reduction directives. Parallel reduction improved computation speed and demonstrated the advantages of parallel processing in numerical operations.

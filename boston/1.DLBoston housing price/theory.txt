@@ -1,0 +1,203 @@
+# Theory: House Price Prediction using Artificial Neural Network (ANN)
+
+## Aim
+
+To implement a Deep Learning model using an Artificial Neural Network (ANN) for predicting house prices using the Boston Housing dataset.
+
+---
+
+# Introduction
+
+Artificial Neural Network (ANN) is a machine learning technique inspired by the human brain. It consists of interconnected neurons organized into layers. ANNs are widely used for solving regression and classification problems.
+
+In this practical, an ANN model is used to predict house prices based on different housing features such as:
+
+* Number of rooms (RM)
+* Pupil-teacher ratio (PTRATIO)
+* Lower status population percentage (LSTAT)
+
+The model learns patterns from historical housing data and predicts the MEDV (Median Value of Homes).
+
+---
+
+# About the Dataset
+
+The Boston Housing dataset contains information about houses in Boston suburbs.
+
+### Important Features Used
+
+1. **RM** – Average number of rooms per dwelling
+2. **LSTAT** – Percentage of lower status population
+3. **PTRATIO** – Pupil-teacher ratio by town
+4. **MEDV** – Median value of owner-occupied homes (Target Variable)
+
+The target of the model is to predict the MEDV value.
+
+---
+
+# Concept of Deep Learning
+
+Deep Learning is a subset of Machine Learning that uses neural networks with multiple layers.
+
+### Main Components of ANN
+
+## 1. Input Layer
+
+The input layer receives feature values from the dataset.
+In this experiment:
+
+* RM
+* LSTAT
+* PTRATIO
+  are used as input features.
+
+## 2. Hidden Layers
+
+Hidden layers perform calculations and learn patterns from the data.
+
+The model contains:
+
+* First hidden layer with 128 neurons
+* Second hidden layer with 64 neurons
+
+### Activation Function
+
+ReLU (Rectified Linear Unit) activation function is used.
+
+#### Formula
+
+genui{"math_block_widget_always_prefetch_v2":{"content":"f(x)=\max(0,x)"}}
+
+ReLU helps the network learn non-linear relationships and improves training speed.
+
+## 3. Output Layer
+
+The output layer contains 1 neuron because the model predicts one continuous value (house price).
+
+Linear activation is used for regression problems.
+
+---
+
+# Data Preprocessing
+
+Data preprocessing is an important step before training the model.
+
+## 1. Removing Unnecessary Columns
+
+Unused columns such as:
+
+* Unnamed columns
+* Categorical MEDV column
+  are removed.
+
+## 2. Checking Missing Values
+
+The dataset is checked for null values using:
+
+* isnull()
+* info()
+
+## 3. Feature Scaling
+
+StandardScaler is used to normalize the data.
+
+Feature scaling ensures that all input features are on a similar scale, which improves neural network performance.
+
+### Standardization Formula
+
+genui{"math_block_widget_always_prefetch_v2":{"content":"z=\frac{x-\mu}{\sigma}"}}
+
+Where:
+
+* x = original value
+* μ = mean
+* σ = standard deviation
+
+---
+
+# Train-Test Split
+
+The dataset is divided into:
+
+* 75% Training Data
+* 25% Testing Data
+
+Training data is used to train the model.
+Testing data is used to evaluate model performance.
+
+---
+
+# Model Compilation
+
+The model is compiled using:
+
+* Optimizer: Adam
+* Loss Function: Mean Squared Error (MSE)
+* Metric: Mean Absolute Error (MAE)
+
+## Mean Squared Error (MSE)
+
+MSE measures the average squared difference between actual and predicted values.
+
+genui{"math_block_widget_always_prefetch_v2":{"content":"MSE=\frac{1}{n}\sum_{i=1}^{n}(y_i-\hat{y_i})^2"}}
+
+## Mean Absolute Error (MAE)
+
+MAE measures the average absolute difference between actual and predicted values.
+
+genui{"math_block_widget_always_prefetch_v2":{"content":"MAE=\frac{1}{n}\sum_{i=1}^{n}|y_i-\hat{y_i}|"}}
+
+Lower MSE and MAE values indicate better prediction accuracy.
+
+---
+
+# Model Training
+
+The model is trained for 100 epochs.
+
+### Epoch
+
+An epoch means one complete pass of the training dataset through the neural network.
+
+During training:
+
+* The network adjusts weights
+* Learns relationships between features and target values
+* Reduces prediction error
+
+---
+
+# Prediction
+
+After training, the model predicts house prices using unseen test data.
+
+Predicted values are compared with actual house prices to measure model accuracy.
+
+---
+
+# Advantages of ANN
+
+1. Can learn complex relationships
+2. High prediction capability
+3. Handles large datasets efficiently
+4. Improves performance with more training data
+
+---
+
+# Applications
+
+1. House price prediction
+2. Stock market forecasting
+3. Weather prediction
+4. Medical diagnosis
+5. Sales forecasting
+
+---
+
+# Conclusion
+
+In this practical, an Artificial Neural Network model was successfully implemented using Keras and TensorFlow for house price prediction.
+
+The dataset was preprocessed, normalized, and divided into training and testing sets. The ANN model learned patterns from the data and predicted house prices with good accuracy using regression techniques.
+
+This experiment demonstrates how Deep Learning models can be used for real-world prediction problems.

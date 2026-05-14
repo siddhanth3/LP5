@@ -1,0 +1,292 @@
+# Theory: Vector Addition using CUDA Parallel Computing
+
+## Aim
+
+To implement Vector Addition using CUDA programming and perform parallel computation on GPU for faster execution.
+
+---
+
+# Introduction
+
+Vector Addition is one of the basic operations in parallel computing where corresponding elements of two vectors are added to produce a resultant vector.
+
+CUDA programming allows vector addition to be executed on GPU using thousands of parallel threads, making computation much faster than CPU execution.
+
+In this practical, CUDA is used to perform vector addition in parallel.
+
+---
+
+# What is CUDA?
+
+CUDA (Compute Unified Device Architecture) is a parallel computing platform developed by NVIDIA.
+
+CUDA enables programmers to use GPU resources for general-purpose computing.
+
+Advantages:
+
+1. Massive parallel processing
+2. Faster execution
+3. Efficient handling of large data
+
+---
+
+# What is GPU Computing?
+
+GPU Computing uses the Graphics Processing Unit to perform parallel operations.
+
+Comparison:
+
+* CPU → Few powerful cores
+* GPU → Thousands of smaller cores
+
+This makes GPU ideal for operations such as:
+
+* Vector addition
+* Matrix multiplication
+* Deep learning
+
+---
+
+# What is Vector Addition?
+
+Vector Addition adds corresponding elements of two vectors.
+
+Example:
+
+* A = [1, 2, 3]
+* B = [4, 5, 6]
+
+Result:
+
+* C = [5, 7, 9]
+
+---
+
+# Vector Addition Formula
+
+Each element is calculated as:
+
+C_i=A_i+B_i
+
+Where:
+
+* A = First vector
+* B = Second vector
+* C = Result vector
+
+---
+
+# Parallel Vector Addition
+
+In CUDA:
+
+* Each GPU thread computes one element of the resultant vector.
+
+Advantages:
+
+* Simultaneous computation
+* Faster processing for large vectors
+
+---
+
+# CUDA Programming Model
+
+## 1. Host
+
+The CPU is called the Host.
+
+Responsibilities:
+
+* Allocate memory
+* Transfer data
+* Launch CUDA kernel
+
+---
+
+## 2. Device
+
+The GPU is called the Device.
+
+Responsibilities:
+
+* Execute parallel computations
+
+---
+
+# CUDA Kernel
+
+A CUDA Kernel is a function executed on the GPU.
+
+Example:
+
+```cpp id="l8x3wq"
+__global__ void vectorAdd()
+```
+
+The `__global__` keyword indicates:
+
+* Function runs on GPU
+* Called from CPU
+
+---
+
+# Threads in CUDA
+
+CUDA organizes execution into:
+
+1. Threads
+2. Blocks
+3. Grids
+
+---
+
+## Thread
+
+Smallest execution unit.
+
+Each thread performs:
+
+* One vector element addition
+
+---
+
+## Block
+
+A collection of threads.
+
+Threads within a block can cooperate.
+
+---
+
+## Grid
+
+A collection of blocks.
+
+The entire vector operation is distributed across the grid.
+
+---
+
+# Thread Index Calculation
+
+Each thread identifies its position using:
+
+```cpp id="t9f4pd"
+int i = blockIdx.x * blockDim.x + threadIdx.x;
+```
+
+Where:
+
+* blockIdx.x → Block index
+* blockDim.x → Number of threads per block
+* threadIdx.x → Thread index inside block
+
+---
+
+# Memory Management in CUDA
+
+## Host Memory
+
+Memory allocated on CPU.
+
+---
+
+## Device Memory
+
+Memory allocated on GPU using:
+
+```cpp id="y2v8mk"
+cudaMalloc()
+```
+
+---
+
+# Data Transfer
+
+Data is transferred between CPU and GPU using:
+
+```cpp id="n5h1ru"
+cudaMemcpy()
+```
+
+Types:
+
+1. Host to Device
+2. Device to Host
+
+---
+
+# Kernel Launch
+
+CUDA kernel execution syntax:
+
+```cpp id="u4k7ja"
+kernel<<<gridSize, blockSize>>>()
+```
+
+Where:
+
+* gridSize → Number of blocks
+* blockSize → Threads per block
+
+---
+
+# Synchronization
+
+CUDA synchronization ensures all GPU threads complete execution before proceeding.
+
+Example:
+
+```cpp id="o1g9we"
+cudaDeviceSynchronize()
+```
+
+---
+
+# Advantages of CUDA Vector Addition
+
+1. Faster execution
+2. Parallel processing
+3. Efficient GPU utilization
+4. Better performance for large datasets
+
+---
+
+# Applications
+
+1. Scientific computing
+2. Machine learning
+3. Graphics processing
+4. Signal processing
+5. Data analytics
+6. Neural networks
+
+---
+
+# Performance Improvement
+
+Parallel CUDA execution is faster because:
+
+* Thousands of vector elements are processed simultaneously
+* GPU cores execute operations in parallel
+
+---
+
+# Output Explanation
+
+The program:
+
+1. Accepts vector input
+2. Allocates GPU memory
+3. Copies vectors to GPU
+4. Executes CUDA kernel
+5. Performs vector addition
+6. Copies result back to CPU
+7. Displays resultant vector
+
+---
+
+# Conclusion
+
+In this practical, Vector Addition was successfully implemented using CUDA parallel programming.
+
+The computation was performed on GPU using multiple threads, where each thread calculated one element of the resultant vector. CUDA significantly improved execution speed and demonstrated the efficiency of GPU-based parallel computing for vector operations.

@@ -1,0 +1,298 @@
+# Theory: Matrix Multiplication using CUDA Parallel Computing
+
+## Aim
+
+To implement Matrix Multiplication using CUDA programming and perform parallel computation on GPU for faster execution.
+
+---
+
+# Introduction
+
+Matrix multiplication is an important mathematical operation used in:
+
+* Machine Learning
+* Graphics Processing
+* Scientific Computing
+* Deep Learning
+
+Traditional CPU-based matrix multiplication can be slow for large matrices. CUDA allows parallel execution on GPU, significantly improving performance.
+
+In this practical, CUDA programming is used to perform matrix multiplication using GPU threads.
+
+---
+
+# What is CUDA?
+
+CUDA (Compute Unified Device Architecture) is a parallel computing platform developed by NVIDIA.
+
+CUDA enables developers to use GPU power for general-purpose computing.
+
+Advantages:
+
+1. Massive parallel processing
+2. Faster computation
+3. Efficient handling of large datasets
+
+---
+
+# What is GPU Computing?
+
+GPU (Graphics Processing Unit) contains thousands of cores capable of executing multiple tasks simultaneously.
+
+Compared to CPU:
+
+* CPU → Few powerful cores
+* GPU → Many lightweight cores
+
+This makes GPU highly efficient for matrix operations.
+
+---
+
+# Matrix Multiplication
+
+## Definition
+
+Matrix multiplication combines two matrices to produce a new matrix.
+
+If:
+
+* Matrix A size = m × n
+* Matrix B size = n × p
+
+Then:
+
+* Result Matrix C size = m × p
+
+---
+
+# Matrix Multiplication Formula
+
+Each element of the result matrix is calculated as:
+
+C_{ij}=\sum_{k=1}^{n}A_{ik}B_{kj}
+
+Where:
+
+* A = First matrix
+* B = Second matrix
+* C = Result matrix
+
+---
+
+# Parallel Matrix Multiplication
+
+In CUDA:
+
+* Each GPU thread computes one element of the result matrix.
+
+This allows thousands of computations to occur simultaneously.
+
+Advantages:
+
+* Faster execution
+* Reduced computation time
+
+---
+
+# CUDA Programming Model
+
+## 1. Host
+
+The CPU is called the Host.
+
+Responsibilities:
+
+* Allocate memory
+* Launch CUDA kernels
+* Transfer data
+
+---
+
+## 2. Device
+
+The GPU is called the Device.
+
+Responsibilities:
+
+* Execute parallel computations
+
+---
+
+# CUDA Kernel
+
+A Kernel is a function executed on the GPU.
+
+Example:
+
+```cpp id="h4h7j9"
+__global__ void matrixMul()
+```
+
+The `__global__` keyword indicates:
+
+* Function runs on GPU
+* Called from CPU
+
+---
+
+# Threads in CUDA
+
+CUDA uses:
+
+* Threads
+* Blocks
+* Grids
+
+---
+
+## Thread
+
+Smallest execution unit.
+
+Each thread performs:
+
+* One matrix element calculation
+
+---
+
+## Block
+
+A group of threads.
+
+Threads inside a block can cooperate using shared memory.
+
+---
+
+## Grid
+
+A collection of blocks.
+
+The entire matrix operation is distributed across the grid.
+
+---
+
+# Thread Index Calculation
+
+Each thread identifies its matrix position using:
+
+```cpp id="a1d9p8"
+int row = blockIdx.y * blockDim.y + threadIdx.y;
+int col = blockIdx.x * blockDim.x + threadIdx.x;
+```
+
+Where:
+
+* blockIdx → Block index
+* blockDim → Block dimensions
+* threadIdx → Thread index
+
+---
+
+# Memory Management in CUDA
+
+## Host Memory
+
+Memory allocated on CPU.
+
+---
+
+## Device Memory
+
+Memory allocated on GPU using:
+
+```cpp id="g7j2ql"
+cudaMalloc()
+```
+
+---
+
+# Data Transfer
+
+Data is copied between CPU and GPU using:
+
+```cpp id="v6u0rt"
+cudaMemcpy()
+```
+
+Types:
+
+1. Host to Device
+2. Device to Host
+
+---
+
+# Kernel Execution
+
+The kernel is launched using:
+
+```cpp id="d9w2xe"
+kernel<<<gridSize, blockSize>>>()
+```
+
+Where:
+
+* gridSize → Number of blocks
+* blockSize → Threads per block
+
+---
+
+# Synchronization
+
+CUDA synchronization ensures all GPU threads complete execution before continuing.
+
+Example:
+
+```cpp id="e0ks3m"
+cudaDeviceSynchronize()
+```
+
+---
+
+# Advantages of CUDA Matrix Multiplication
+
+1. Faster execution
+2. Parallel processing
+3. Efficient large matrix computation
+4. Better GPU utilization
+
+---
+
+# Applications
+
+1. Deep Learning
+2. Scientific simulations
+3. Computer graphics
+4. Image processing
+5. Data analytics
+6. Neural networks
+
+---
+
+# Performance Improvement
+
+Parallel CUDA implementation is much faster than sequential CPU execution because:
+
+* Thousands of GPU threads execute simultaneously
+* Matrix operations are highly parallelizable
+
+---
+
+# Output Explanation
+
+The program:
+
+1. Accepts matrix input
+2. Allocates GPU memory
+3. Copies matrices to GPU
+4. Executes CUDA kernel
+5. Computes matrix multiplication
+6. Copies result back to CPU
+7. Displays result matrix
+
+---
+
+# Conclusion
+
+In this practical, Matrix Multiplication was successfully implemented using CUDA parallel programming.
+
+The computation was performed on GPU using multiple threads, where each thread calculated one element of the result matrix. CUDA significantly improved computational efficiency and demonstrated the power of GPU-based parallel processing for matrix operations.

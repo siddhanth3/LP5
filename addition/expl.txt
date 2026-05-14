@@ -1,0 +1,149 @@
+%%writefile vector_add.cu
+
+// Include input-output library for cout
+#include <iostream>
+
+// Include CUDA runtime library
+#include <cuda_runtime.h>
+
+// Use standard namespace
+using namespace std;
+
+
+// ---------------- GPU KERNEL FUNCTION ----------------
+
+// __global__ means this function runs on GPU
+__global__ void addVectors(int *A, int *B, int *C, int n)
+{
+    // Calculate unique index for each thread
+    int i = blockIdx.x * blockDim.x + threadIdx.x;
+
+    // Check if index is inside vector size
+    if(i < n)
+    {
+        // Add corresponding elements of A and B
+        C[i] = A[i] + B[i];
+    }
+}
+
+
+// ---------------- MAIN FUNCTION ----------------
+
+int main()
+{
+    // Number of elements in vectors
+    int n = 10;
+
+    // Calculate total memory size in bytes
+    int size = n * sizeof(int);
+
+    
+    // Host pointers (CPU memory)
+    int *A, *B, *C;
+
+    // Device pointers (GPU memory)
+    int *dev_A, *dev_B, *dev_C;
+
+
+    // ---------------- ALLOCATE HOST MEMORY ----------------
+
+    // Allocate pinned memory for vector A on CPU
+    cudaMallocHost(&A, size);
+
+    // Allocate pinned memory for vector B on CPU
+    cudaMallocHost(&B, size);
+
+    // Allocate pinned memory for vector C on CPU
+    cudaMallocHost(&C, size);
+
+
+    // ---------------- INITIALIZE VECTORS ----------------
+
+    // Fill vectors with sample values
+    for(int i = 0; i < n; i++)
+    {
+        // A contains normal numbers
+        A[i] = i;
+
+        // B contains multiples of 2
+        B[i] = i * 2;
+    }
+
+
+    // ---------------- ALLOCATE GPU MEMORY ----------------
+
+    // Allocate memory for A on GPU
+    cudaMalloc(&dev_A, size);
+
+    // Allocate memory for B on GPU
+    cudaMalloc(&dev_B, size);
+
+    // Allocate memory for C on GPU
+    cudaMalloc(&dev_C, size);
+
+
+    // ---------------- COPY DATA CPU -> GPU ----------------
+
+    // Copy vector A from CPU to GPU
+    cudaMemcpy(dev_A, A, size, cudaMemcpyHostToDevice);
+
+    // Copy vector B from CPU to GPU
+    cudaMemcpy(dev_B, B, size, cudaMemcpyHostToDevice);
+
+
+    // ---------------- LAUNCH CUDA KERNEL ----------------
+
+    // Number of threads inside one block
+    int blockSize = 256;
+
+    // Calculate required number of blocks
+    int numBlocks = (n + blockSize - 1) / blockSize;
+
+    // Launch GPU kernel
+    addVectors<<<numBlocks, blockSize>>>(dev_A, dev_B, dev_C, n);
+
+
+    // ---------------- COPY RESULT GPU -> CPU ----------------
+
+    // Copy result vector C from GPU to CPU
+    cudaMemcpy(C, dev_C, size, cudaMemcpyDeviceToHost);
+
+
+    // ---------------- PRINT RESULT ----------------
+
+    cout << "Vector Addition Result:\n";
+
+    // Print all vector addition results
+    for(int i = 0; i < n; i++)
+    {
+        cout << A[i] << " + " << B[i] << " = " << C[i] << endl;
+    }
+
+
+    // ---------------- FREE GPU MEMORY ----------------
+
+    // Free GPU memory of A
+    cudaFree(dev_A);
+
+    // Free GPU memory of B
+    cudaFree(dev_B);
+
+    // Free GPU memory of C
+    cudaFree(dev_C);
+
+
+    // ---------------- FREE CPU MEMORY ----------------
+
+    // Free CPU memory of A
+    cudaFreeHost(A);
+
+    // Free CPU memory of B
+    cudaFreeHost(B);
+
+    // Free CPU memory of C
+    cudaFreeHost(C);
+
+
+    // Program ended successfully
+    return 0;
+}
